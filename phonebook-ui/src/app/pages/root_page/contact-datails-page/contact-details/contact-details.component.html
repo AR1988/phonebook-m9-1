@@ -1,11 +1,7 @@
-<ul ngbNav #nav="ngbNav" [activeId]="1" class="nav-tabs justify-content-center" keyboard="changeWithArrows"
+<app-contact [contactId]="contactId"></app-contact>
+
+<ul ngbNav #nav="ngbNav" [activeId]="2" class="nav-tabs justify-content-center pt-3" keyboard="changeWithArrows"
     id="navbar-contact-details">
-  <li [ngbNavItem]="1">
-    <a ngbNavLink placement="top" ngbTooltip="Contact info" id="tab-link-info">Info</a>
-    <ng-template ngbNavContent id="tab-info-content">
-      <app-contact [contactId]="contactId"></app-contact>
-    </ng-template>
-  </li>
   <li [ngbNavItem]="2">
     <a ngbNavLink placement="top" ngbTooltip="Contact phones">Phones</a>
     <ng-template ngbNavContent id="tab-phones-content">
