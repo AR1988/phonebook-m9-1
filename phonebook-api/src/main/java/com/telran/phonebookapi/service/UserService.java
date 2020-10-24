@@ -72,8 +72,7 @@ public class UserService {
             profile.setUser(user);
 
             activationTokenRepository.save(new ActivationToken(token, user));
-            emailSender.sendMail(user.getEmail(), ACTIVATION_SUBJECT, ACTIVATION_MESSAGE
-                    + uiHost + UI_ACTIVATION_LINK + token);
+            emailSender.sendMail(user.getEmail(), ACTIVATION_SUBJECT, ACTIVATION_MESSAGE, uiHost + UI_ACTIVATION_LINK + token);
         }
     }
 
@@ -95,7 +94,7 @@ public class UserService {
 
         String message = RECOVER_YOUR_PASSWORD_MESSAGE + uiHost + UI_RECOVERY_LINK + token;
 
-        emailSender.sendMail(userId, "Password recovery", message);
+        emailSender.sendMail(userId, "Password recovery", RECOVER_YOUR_PASSWORD_MESSAGE, uiHost + UI_RECOVERY_LINK + token);
     }
 
     public void createNewPassword(String recoveryToken, String password) {

@@ -11,6 +11,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
+import javax.mail.MessagingException;
 import javax.validation.Valid;
 import java.util.stream.Collectors;
 
@@ -25,7 +26,7 @@ public class UserController {
     }
 
     @PostMapping("")
-    public void addUser(@Valid @RequestBody UserDto userDto) {
+    public void addUser(@Valid @RequestBody UserDto userDto) throws MessagingException {
         userService.addUser(userDto.email, userDto.password);
     }
 
@@ -35,7 +36,7 @@ public class UserController {
     }
 
     @PostMapping("/password/recovery")
-    public void recoverPassword(@Valid @RequestBody RecoveryPasswordDto recoveryPasswordDto) {
+    public void recoverPassword(@Valid @RequestBody RecoveryPasswordDto recoveryPasswordDto) throws MessagingException {
         userService.sendRecoveryToken(recoveryPasswordDto.email);
     }
 

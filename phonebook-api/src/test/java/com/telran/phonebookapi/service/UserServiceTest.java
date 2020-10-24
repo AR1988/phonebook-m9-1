@@ -21,6 +21,8 @@ import javax.persistence.EntityNotFoundException;
 import java.util.Optional;
 import java.util.UUID;
 
+import static com.telran.phonebookapi.service.UserService.UI_ACTIVATION_LINK;
+import static com.telran.phonebookapi.service.UserService.UI_RECOVERY_LINK;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
@@ -71,9 +73,11 @@ class UserServiceTest {
         verify(activationTokenRepository, times(1)).save(argThat(token ->
                 token.getUser().getEmail().equals(email)
         ));
-        verify(emailSender, times(1)).sendMail(eq(email),
-                eq(UserService.ACTIVATION_SUBJECT),
-                anyString());
+        verify(emailSender, times(1))
+                .sendMail(eq(email),
+                        eq(UserService.ACTIVATION_SUBJECT),
+                        anyString(),
+                        contains(UI_ACTIVATION_LINK));
     }
 
     @Test
@@ -144,7 +148,11 @@ class UserServiceTest {
         verify(recoveryTokenRepository, times(1)).save(argThat(token ->
                 token.getUser().getEmail().equals(email)));
 
-        verify(emailSender, times(1)).sendMail(eq(email), anyString(), anyString());
+        verify(emailSender, times(1))
+                .sendMail(eq(email),
+                        anyString(),
+                        anyString(),
+                        contains(UI_RECOVERY_LINK));
     }
 
     @Test
@@ -160,7 +168,11 @@ class UserServiceTest {
         verify(recoveryTokenRepository, times(1)).save(argThat(token ->
                 token.getUser().getEmail().equals(email.toLowerCase())));
 
-        verify(emailSender, times(1)).sendMail(eq(email.toLowerCase()), anyString(), anyString());
+        verify(emailSender, times(1))
+                .sendMail(eq(email.toLowerCase()),
+                        anyString(),
+                        anyString(),
+                        contains(UI_RECOVERY_LINK));
     }
 
     @Test
