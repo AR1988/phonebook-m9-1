@@ -1,95 +1,12 @@
 <div class="flex-fill mt-3">
   <div class="row">
-    <div class="col-lg-3">
+    <div class="col-lg-2">
       <div class="btn-block btn-group-vertical">
         <button class="btn btn-block btn-info text-left text-white" *ngFor="let link of links"
                 routerLink="{{link.path}}">{{link.title}}</button>
       </div>
-      <div *ngIf="info" class="card mt-2">
-        <div class="card-header">
-          <h5 class="text-center">Statistic</h5>
-        </div>
-        <div class="card-body">
-
-          <div class="row">
-            <div class="col-lg-9">
-              <h6>Users</h6>
-            </div>
-            <div class="col-lg-3">
-              {{ info.users }}
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-lg-9">
-              <h6>Activated Users</h6>
-            </div>
-            <div class="col-lg-3">
-              {{ info.activatedUsers }}
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-lg-9">
-              <h6>Emails</h6>
-            </div>
-            <div class="col-lg-3">
-              {{ info.emails }}
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-lg-9">
-              <h6>Addresses</h6>
-            </div>
-            <div class="col-lg-3">
-              {{ info.addresses }}
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-lg-9">
-              <h6>Phones</h6>
-            </div>
-            <div class="col-lg-3">
-              {{ info.phones }}
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-lg-9">
-              <h6>Contacts</h6>
-            </div>
-            <div class="col-lg-3">
-              {{ info.contacts }}
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-lg-9">
-              <h6>Recovery tokens</h6>
-            </div>
-            <div class="col-lg-3">
-              {{ info.recoveryTokens }}
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-lg-9">
-              <h6>Activations tokens</h6>
-            </div>
-            <div class="col-lg-3">
-              {{ info.activateTokens }}
-            </div>
-          </div>
-
-        </div>
-        <div class="card-header">
-          <button class="btn btn-sm btn-outline-success btn-block mt-1" type="button" (click)="reload()">Reload Stats</button>
-        </div>
-      </div>
     </div>
-    <div class="col-lg-9">
+    <div class="col-lg-10">
       <router-outlet></router-outlet>
     </div>
   </div>

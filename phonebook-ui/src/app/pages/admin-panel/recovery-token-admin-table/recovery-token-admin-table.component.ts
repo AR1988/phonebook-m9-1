@@ -21,9 +21,7 @@ export class RecoveryTokenAdminTableComponent implements OnInit, OnDestroy {
 
   removeToken(token: string): void {
     this.subscriptions.add(this.adminService.removeRecoveryToken(token).subscribe(() => {
-        this.adminService.triggerOnReloadContactsList();
         this.ngOnInit();
-        this.adminService.triggerOnReloadContactsList();
       })
     );
   }

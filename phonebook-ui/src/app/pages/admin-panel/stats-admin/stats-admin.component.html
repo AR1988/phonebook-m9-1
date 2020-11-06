@@ -1,0 +1,14 @@
+<div *ngIf="infoArray.length > 0" class="card mt-2">
+  <div class="card-header">
+    <h5 class="text-center">Statistic</h5>
+  </div>
+  <div class="card-body">
+    <ul class="list-group list-group-flush" *ngFor="let info of infoArray; index as i">
+      <li class="list-group-item d-flex justify-content-between text-black" [class.list-group-item-dark]="i % 2 === 0">
+        <b>{{info.field | titlecase }}:</b> <span> {{ info.value | number }}</span></li>
+    </ul>
+  </div>
+  <div class="card-header">
+    <button class="btn btn-outline-success btn-block mt-1" type="button" (click)="reload()">Reload Stats</button>
+  </div>
+</div>

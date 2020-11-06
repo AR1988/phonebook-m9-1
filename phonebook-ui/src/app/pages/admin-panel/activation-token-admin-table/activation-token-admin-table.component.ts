@@ -32,9 +32,7 @@ export class ActivationTokenAdminTableComponent implements OnInit, OnDestroy {
   removeToken(token: string): void {
     this.subscriptions.add(
       this.adminService.removeActivationToken(token).subscribe(() => {
-        this.adminService.triggerOnReloadContactsList();
         this.ngOnInit();
-        this.adminService.triggerOnReloadContactsList();
       })
     );
   }

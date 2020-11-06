@@ -22,6 +22,7 @@ import {EmailsAdminTableComponent} from "./pages/admin-panel/emails-admin-table/
 import {RecoveryTokenAdminTableComponent} from "./pages/admin-panel/recovery-token-admin-table/recovery-token-admin-table.component";
 import {ActivationTokenAdminTableComponent} from "./pages/admin-panel/activation-token-admin-table/activation-token-admin-table.component";
 import {PageNotFoundComponent} from "./page-not-found/page-not-found.component";
+import {StatsAdminComponent} from "./pages/admin-panel/stats-admin/stats-admin.component";
 
 const routes: Routes = [
   {path: '', redirectTo: 'contacts', pathMatch: 'full'},
@@ -46,9 +47,10 @@ const routes: Routes = [
           {path: "addresses", component: AddressesAdminTableComponent},
           {path: "emails", component: EmailsAdminTableComponent},
           {path: "recovery-tokens", component: RecoveryTokenAdminTableComponent},
-          {path: "activate-tokens", component: ActivationTokenAdminTableComponent}
+          {path: "activate-tokens", component: ActivationTokenAdminTableComponent},
+          {path: "statistic", component: StatsAdminComponent}
         ]
-        , canActivate: [AdminGuard, AuthGuard]
+        , canActivate: [AdminGuard]
       },
       {
         path: 'contacts', component: ContactsComponent

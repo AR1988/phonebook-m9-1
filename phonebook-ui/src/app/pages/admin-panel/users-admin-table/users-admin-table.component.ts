@@ -33,9 +33,7 @@ export class UsersAdminTableComponent implements OnInit, OnDestroy {
   removeUser(user: User) {
     this.subscriptions.add(
       this.adminService.removeUser(user).subscribe(() => {
-        this.adminService.triggerOnReloadContactsList();
         this.ngOnInit();
-        this.adminService.triggerOnReloadContactsList();
       })
     );
   }
@@ -43,9 +41,7 @@ export class UsersAdminTableComponent implements OnInit, OnDestroy {
   activate(user: User): void {
     this.subscriptions.add(
       this.adminService.activateUser(user).subscribe(() => {
-        this.adminService.triggerOnReloadContactsList();
         this.ngOnInit();
-        this.adminService.triggerOnReloadContactsList();
       })
     );
   }

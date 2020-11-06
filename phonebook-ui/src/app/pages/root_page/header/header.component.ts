@@ -14,7 +14,7 @@ export class HeaderComponent implements OnInit {
 
   public isMenuCollapsed = true;
 
-  constructor(public tokenStorage: TokenStorageService,
+  constructor(private tokenStorage: TokenStorageService,
               private router: Router,
               private modalService: NgbModal,
               private toastService: ToastService) {

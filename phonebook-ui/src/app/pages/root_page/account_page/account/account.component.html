@@ -4,6 +4,12 @@
       <div class="card-body">
         <h4>Account</h4>
         <button type="button" class="btn btn-link" routerLink="password">Password</button>
+        <div *ngIf="tokenStorage.isUserAdmin()">
+          <div class="dropdown-divider"></div>
+          <button type="button" class="btn btn-outline-primary btn-block"
+                  [routerLink]="'../admin-panel/statistic'">Admin panel
+          </button>
+        </div>
       </div>
     </div>
   </div>

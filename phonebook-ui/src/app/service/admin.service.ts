@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {User} from "../model/user";
-import {Observable, Subject} from "rxjs";
+import {Observable} from "rxjs";
 import {UserAdmin} from "../model/admin-models/user-admin";
 import {ContactAdmin} from "../model/admin-models/contact-admin";
 import {PhoneAdmin} from "../model/admin-models/phone-admin";
@@ -17,7 +17,6 @@ import {RecoveryTokenAdmin} from "../model/admin-models/recovery-token";
 export class AdminService {
 
   private readonly adminPath = '/api/admin';
-  private _trigger = new Subject<void>();
 
   constructor(private http: HttpClient) {
   }
@@ -70,11 +69,4 @@ export class AdminService {
     return this.http.patch<void>(`${this.adminPath}/activate`, user);
   }
 
-  get trigger$(): Observable<any> {
-    return this._trigger.asObservable();
-  }
-
-  triggerOnReloadContactsList(): void {
-    this._trigger.next();
-  }
 }

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {TokenStorageService} from "../../../../service/tokenHandle/token-storage.service";
 
 @Component({
   selector: 'app-user-details-pgae',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AccountComponent implements OnInit {
 
-  constructor() { }
+  constructor(public tokenStorage: TokenStorageService) { }
 
   ngOnInit(): void {
   }
