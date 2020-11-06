@@ -2,6 +2,7 @@ package com.telran.phonebookapi.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.telran.phonebookapi.security.errorhandling.Http401UnauthenticatedEntryPoint;
+import com.telran.phonebookapi.security.errorhandling.Http403AccessDeniedHandler;
 import com.telran.phonebookapi.security.filter.JwtAuthenticationFilter;
 import com.telran.phonebookapi.security.filter.UserLoginAuthenticationFilter;
 import com.telran.phonebookapi.security.service.DbUserDetailService;
@@ -51,6 +52,7 @@ public class UserAuthenticationSecurity extends WebSecurityConfigurerAdapter {
                         AbstractPreAuthenticatedProcessingFilter.class)
                 .exceptionHandling()
                 .authenticationEntryPoint(new Http401UnauthenticatedEntryPoint())
+                .accessDeniedHandler(new Http403AccessDeniedHandler())
                 .and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
