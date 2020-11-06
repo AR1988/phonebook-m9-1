@@ -5,7 +5,7 @@ import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
 
-public interface IEmailRepository extends CrudRepository <Email, Integer> {
+public interface IEmailRepository extends CrudRepository<Email, Integer> {
 
     List<Email> findAll();
 

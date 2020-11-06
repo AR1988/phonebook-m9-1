@@ -38,6 +38,24 @@ public class TestUserRunner implements ApplicationRunner {
             User user = new User(testEmail, bCryptPasswordEncoder.encode(testPassword));
             user.setActive(true);
             user.addRole(UserRole.USER);
+
+            userRepository.save(user);
+
+            Contact profile = new Contact(null, user);
+
+            user.setMyProfile(profile);
+            contactRepository.save(profile);
+
+            userRepository.save(user);
+        }
+
+        if (userRepository.findById("admin." + testEmail).isEmpty()) {
+
+            User user = new User("admin." + testEmail, bCryptPasswordEncoder.encode("admin." + testPassword));
+            user.setActive(true);
+            user.addRole(UserRole.USER);
+            user.addRole(UserRole.ADMIN);
+
             userRepository.save(user);
 
             Contact profile = new Contact(null, user);

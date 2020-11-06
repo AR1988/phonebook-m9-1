@@ -10,5 +10,4 @@ public interface IPhoneRepository extends CrudRepository<Phone, Integer> {
     List<Phone> findAll();
 
     List<Phone> findAllByContactId(int id);
-
 }

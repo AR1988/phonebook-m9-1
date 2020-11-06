@@ -12,4 +12,5 @@ public interface IUserRepository extends CrudRepository<User, String> {
 
     Optional<User> findByEmailAndIsActiveIsTrue(String userName);
 
+    long countByIsActiveIsTrue();
 }
