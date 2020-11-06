@@ -1,0 +1,49 @@
+<div class="table-responsive-lg">
+  <table class="table table-striped" *ngIf="contacts">
+    <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col" (click)="sortBy = 'userId'; reverseSort = !reverseSort">
+        <a [routerLink]>User id<span>
+            <app-sort-icon [show]="sortBy === 'userId'" [iconUp]="reverseSort"></app-sort-icon>
+          </span>
+        </a>
+      </th>
+
+      <th scope="col" (click)="sortBy = 'id'; reverseSort = !reverseSort">
+        <a [routerLink]>id<span>
+            <app-sort-icon [show]="sortBy === 'id'" [iconUp]="reverseSort"></app-sort-icon>
+          </span>
+        </a>
+      </th>
+
+      <th scope="col" (click)="sortBy = 'firstName'; reverseSort = !reverseSort">
+        <a [routerLink]>F. name<span>
+            <app-sort-icon [show]="sortBy === 'firstName'" [iconUp]="reverseSort"></app-sort-icon>
+          </span>
+        </a>
+      </th>
+
+      <th scope="col" (click)="sortBy = 'lastName'; reverseSort = !reverseSort">
+        <a [routerLink]>L. name<span>
+            <app-sort-icon [show]="sortBy === 'lastName'" [iconUp]="reverseSort"></app-sort-icon>
+          </span>
+        </a>
+      </th>
+
+      <th scope="col">Description</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let contact of contacts | sortFilter: sortBy :reverseSort; index as i">
+      <th scope="row">{{ i + 1 }}</th>
+      <td>{{ contact.userId }}</td>
+      <td>{{ contact.id }}</td>
+      <td>{{ contact.firstName }}</td>
+      <td>{{ contact.lastName}}</td>
+      <td>{{ contact.description | slice: 0:12}}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>

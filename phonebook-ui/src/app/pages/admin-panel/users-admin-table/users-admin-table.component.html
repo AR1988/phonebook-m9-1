@@ -1,0 +1,58 @@
+<table class="table table-striped" *ngIf="users">
+  <thead>
+  <tr>
+
+    <th scope="col">#</th>
+
+    <th scope="col" (click)="sortBy = 'email'; reverseSort = !reverseSort">
+      <a [routerLink]>Email
+        <span>
+            <app-sort-icon [show]="sortBy === 'email'" [iconUp]="reverseSort"></app-sort-icon>
+          </span>
+      </a>
+    </th>
+
+    <th scope="col" (click)="sortBy = 'roles'; reverseSort = !reverseSort" >
+      <a [routerLink]>Roles
+        <span>
+            <app-sort-icon [show]="sortBy === 'roles'" [iconUp]="reverseSort"></app-sort-icon>
+          </span>
+      </a>
+    </th>
+
+    <th scope="col" (click)="sortBy = 'myProfileId'; reverseSort = !reverseSort" >
+      <a [routerLink]>profile
+        <span>
+            <app-sort-icon [show]="sortBy === 'myProfileId'" [iconUp]="reverseSort"></app-sort-icon>
+          </span>
+      </a>
+    </th>
+
+    <th scope="col" (click)="sortBy = 'isActivated'; reverseSort = !reverseSort">
+      <a [routerLink]>isActivated
+        <span>
+            <app-sort-icon [show]="sortBy === 'isActivated'" [iconUp]="reverseSort"></app-sort-icon>
+          </span>
+      </a>
+    </th>
+
+    <th scope="col">...</th>
+
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let user of users | sortFilter: sortBy :reverseSort ; index as i">
+    <th scope="row">{{ i + 1 }}</th>
+    <td>{{ user.email }}</td>
+    <td>{{ user.roles }}</td>
+    <td>{{ user.myProfileId}}</td>
+    <td>
+      <button class="btn btn-warning" (click)="activate(user)" *ngIf="!user.isActivated">Activate user</button>
+      <p *ngIf="user.isActivated">{{ user.isActivated}}</p></td>
+    <td>
+      <button class="btn btn-warning" (click)="removeUser(user)" [disabled]="user.roles.includes('ADMIN')">Remove user</button>
+
+    </td>
+  </tr>
+  </tbody>
+</table>

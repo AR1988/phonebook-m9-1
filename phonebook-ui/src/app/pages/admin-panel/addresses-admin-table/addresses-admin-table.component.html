@@ -1,0 +1,75 @@
+<div class="table-responsive-lg">
+  <table class="table table-striped" *ngIf="addresses">
+    <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col" (click)="sortBy = 'userId'; reverseSort = !reverseSort">
+        <a [routerLink]>userId
+          <span>
+            <app-sort-icon [show]="sortBy === 'userId'" [iconUp]="reverseSort"></app-sort-icon>
+          </span>
+        </a>
+      </th>
+
+      <th scope="col" (click)="sortBy = 'contactId'; reverseSort = !reverseSort">
+        <a [routerLink]>contactId
+          <span>
+            <app-sort-icon [show]="sortBy === 'contactId'" [iconUp]="reverseSort"></app-sort-icon>
+          </span>
+        </a>
+      </th>
+
+      <th scope="col" (click)="sortBy = 'id'; reverseSort = !reverseSort">
+        <a [routerLink]>id
+          <span>
+            <app-sort-icon [show]="sortBy === 'id'" [iconUp]="reverseSort"></app-sort-icon>
+          </span>
+        </a>
+      </th>
+
+      <th scope="col" (click)="sortBy = 'street'; reverseSort = !reverseSort">
+        <a [routerLink]>street
+          <span>
+            <app-sort-icon [show]="sortBy === 'street'" [iconUp]="reverseSort"></app-sort-icon>
+          </span>
+        </a>
+      </th>
+
+      <th scope="col" (click)="sortBy = 'zip'; reverseSort = !reverseSort">
+        <a [routerLink]>zip
+          <span>
+            <app-sort-icon [show]="sortBy === 'zip'" [iconUp]="reverseSort"></app-sort-icon>
+          </span>
+        </a>
+      </th>
+
+      <th scope="col" (click)="sortBy = 'city'; reverseSort = !reverseSort">
+        <a [routerLink]>city <span>
+            <app-sort-icon [show]="sortBy === 'city'" [iconUp]="reverseSort"></app-sort-icon>
+          </span>
+        </a>
+      </th>
+
+      <th scope="col" (click)="sortBy = 'country'; reverseSort = !reverseSort">
+        <a [routerLink]>country <span>
+            <app-sort-icon [show]="sortBy === 'country'" [iconUp]="reverseSort"></app-sort-icon>
+          </span>
+        </a>
+      </th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let address of addresses | sortFilter: sortBy :reverseSort; index as i">
+      <th scope="row">{{ i + 1 }}</th>
+      <td>{{ address.userId }}</td>
+      <td>{{ address.contactId }}</td>
+      <td>{{ address.id }}</td>
+      <td>{{ address.street }}</td>
+      <td>{{ address.zip}}</td>
+      <td>{{ address.city}}</td>
+      <td>{{ address.country}}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>

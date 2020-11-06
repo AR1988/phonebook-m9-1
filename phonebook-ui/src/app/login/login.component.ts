@@ -55,12 +55,16 @@ export class LoginComponent implements OnInit, OnDestroy {
         (data: HttpResponse<any>) => this.callbackOkLogin(data), error => this.callbackErrorLogin(error));
   }
 
-  callbackOkLogin(data: HttpResponse<any>): void {
+  async callbackOkLogin(data: HttpResponse<any>) {
     this.tokenStorage.signOut();
     this.tokenStorage.saveToken(data.headers.get(this.headerName));
 
     this.loading = false;
     this.router.navigate(['./contacts']).then();
+
+    await this.userService.getUserData().subscribe(value => {
+        this.tokenStorage.saveUser(value);
+    });
   }
 
   callbackErrorLogin(error: HttpErrorResponse): void {

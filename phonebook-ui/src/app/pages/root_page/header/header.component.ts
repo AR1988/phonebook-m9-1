@@ -11,9 +11,10 @@ import {ToastService} from "../../../service/toast.service";
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
+
   public isMenuCollapsed = true;
 
-  constructor(private tokenStorage: TokenStorageService,
+  constructor(public tokenStorage: TokenStorageService,
               private router: Router,
               private modalService: NgbModal,
               private toastService: ToastService) {

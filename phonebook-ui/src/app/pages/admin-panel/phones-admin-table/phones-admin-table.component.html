@@ -1,0 +1,57 @@
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th scope="col">#</th>
+    <th scope="col" (click)="sortBy = 'userId'; reverseSort = !reverseSort">
+      <a [routerLink]>userId
+        <span>
+            <app-sort-icon [show]="sortBy === 'userId'" [iconUp]="reverseSort"></app-sort-icon>
+          </span>
+      </a>
+    </th>
+
+    <th scope="col" (click)="sortBy = 'contactId'; reverseSort = !reverseSort">
+      <a [routerLink]>contactId
+        <span>
+            <app-sort-icon [show]="sortBy === 'contactId'" [iconUp]="reverseSort"></app-sort-icon>
+          </span>
+      </a>
+    </th>
+
+    <th scope="col" (click)="sortBy = 'id'; reverseSort = !reverseSort">
+      <a [routerLink]>id
+        <span>
+            <app-sort-icon [show]="sortBy === 'id'" [iconUp]="reverseSort"></app-sort-icon>
+          </span>
+      </a>
+    </th>
+
+    <th scope="col" (click)="sortBy = 'phoneNumber'; reverseSort = !reverseSort">
+      <a [routerLink]>phoneNumber
+        <span>
+            <app-sort-icon [show]="sortBy === 'phoneNumber'" [iconUp]="reverseSort"></app-sort-icon>
+          </span>
+      </a>
+    </th>
+
+    <th scope="col" (click)="sortBy = 'countryCode'; reverseSort = !reverseSort">
+      <a [routerLink]>countryCode
+        <span>
+            <app-sort-icon [show]="sortBy === 'countryCode'" [iconUp]="reverseSort"></app-sort-icon>
+          </span>
+      </a>
+    </th>
+
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let phone of phones | sortFilter: sortBy :reverseSort index as i">
+    <th scope="row">{{ i + 1 }}</th>
+    <td>{{ phone.userId }}</td>
+    <td>{{ phone.contactId }}</td>
+    <td>{{ phone.id }}</td>
+    <td>{{ phone.phoneNumber }}</td>
+    <td>{{ phone.countryCode}}</td>
+  </tr>
+  </tbody>
+</table>

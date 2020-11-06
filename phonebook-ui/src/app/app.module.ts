@@ -46,6 +46,15 @@ import {ContactFilterPipe} from "./pages/root_page/contacts_page/contacts/contac
 import {AddressFilterPipe} from "./pages/root_page/contact-datails-page/address/address-filter.pipe";
 import {EmailFilterPipe} from './pages/root_page/contact-datails-page/email/email-filter.pipe';
 import {PhoneFilterPipe} from './pages/root_page/contact-datails-page/phone/phone-filter.pipe';
+import {AdminPanelComponent} from './pages/admin-panel/admin-panel.component';
+import {UsersAdminTableComponent} from './pages/admin-panel/users-admin-table/users-admin-table.component';
+import {PhonesAdminTableComponent} from './pages/admin-panel/phones-admin-table/phones-admin-table.component';
+import {ContactsAdminTableComponent} from './pages/admin-panel/contacts-admin-table/contacts-admin-table.component';
+import {EmailsAdminTableComponent} from './pages/admin-panel/emails-admin-table/emails-admin-table.component';
+import {AddressesAdminTableComponent} from './pages/admin-panel/addresses-admin-table/addresses-admin-table.component';
+import {RecoveryTokenAdminTableComponent} from './pages/admin-panel/recovery-token-admin-table/recovery-token-admin-table.component';
+import {ActivationTokenAdminTableComponent} from './pages/admin-panel/activation-token-admin-table/activation-token-admin-table.component';
+import {SortFilterPipe} from "./pages/admin-panel/sort-filter.pipe";
 
 @NgModule({
   declarations: [
@@ -86,6 +95,15 @@ import {PhoneFilterPipe} from './pages/root_page/contact-datails-page/phone/phon
     AddressFilterPipe,
     EmailFilterPipe,
     PhoneFilterPipe,
+    AdminPanelComponent,
+    UsersAdminTableComponent,
+    PhonesAdminTableComponent,
+    ContactsAdminTableComponent,
+    EmailsAdminTableComponent,
+    AddressesAdminTableComponent,
+    RecoveryTokenAdminTableComponent,
+    ActivationTokenAdminTableComponent,
+    SortFilterPipe,
   ],
   imports: [
     BrowserModule,
