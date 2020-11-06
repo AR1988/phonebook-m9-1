@@ -21,6 +21,7 @@ import {AddressesAdminTableComponent} from "./pages/admin-panel/addresses-admin-
 import {EmailsAdminTableComponent} from "./pages/admin-panel/emails-admin-table/emails-admin-table.component";
 import {RecoveryTokenAdminTableComponent} from "./pages/admin-panel/recovery-token-admin-table/recovery-token-admin-table.component";
 import {ActivationTokenAdminTableComponent} from "./pages/admin-panel/activation-token-admin-table/activation-token-admin-table.component";
+import {PageNotFoundComponent} from "./page-not-found/page-not-found.component";
 
 const routes: Routes = [
   {path: '', redirectTo: 'contacts', pathMatch: 'full'},
@@ -31,21 +32,6 @@ const routes: Routes = [
   {path: 'user/activation/:token', component: ActivationComponent},
   {path: 'user/forgot-password', component: ForgotPasswordComponent},
   {path: 'user/password-recovery/:token', component: PasswordRecoveryComponent},
-
-  // {path: 'admin-panel', redirectTo:'admin-panel/users'},
-  // {
-  //   path: 'admin-panel', component: AdminPanelComponent,
-  //   children: [
-  //     {path: "users", component: UsersAdminTableComponent},
-  //     {path: "contacts", component: ContactsAdminTableComponent},
-  //     {path: "phones", component: PhonesAdminTableComponent},
-  //     {path: "addresses", component: AddressesAdminTableComponent},
-  //     {path: "emails", component: EmailsAdminTableComponent},
-  //     {path: "recovery-tokens", component: RecoveryTokenAdminTableComponent},
-  //     {path: "activate-tokens", component: ActivationTokenAdminTableComponent}
-  //   ]
-  //   , canActivate: [AdminGuard, AuthGuard]
-  // },
 
   {
     path: '', component: HomePageComponent,
@@ -78,6 +64,8 @@ const routes: Routes = [
       },
     ], canActivate: [AuthGuard]
   },
+  {path: '404', component: PageNotFoundComponent},
+  {path: '**', redirectTo: '404'},
 ]
 
 @NgModule({

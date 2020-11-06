@@ -55,6 +55,7 @@ import {AddressesAdminTableComponent} from './pages/admin-panel/addresses-admin-
 import {RecoveryTokenAdminTableComponent} from './pages/admin-panel/recovery-token-admin-table/recovery-token-admin-table.component';
 import {ActivationTokenAdminTableComponent} from './pages/admin-panel/activation-token-admin-table/activation-token-admin-table.component';
 import {SortFilterPipe} from "./pages/admin-panel/sort-filter.pipe";
+import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
@@ -104,6 +105,7 @@ import {SortFilterPipe} from "./pages/admin-panel/sort-filter.pipe";
     RecoveryTokenAdminTableComponent,
     ActivationTokenAdminTableComponent,
     SortFilterPipe,
+    PageNotFoundComponent,
   ],
   imports: [
     BrowserModule,
