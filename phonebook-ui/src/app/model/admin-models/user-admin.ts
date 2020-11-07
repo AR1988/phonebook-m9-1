@@ -3,4 +3,6 @@ export interface UserAdmin {
   myProfileId: number
   roles: string[]
   isActivated: boolean
+  registeredAt: string
+  activateAt: string
 }

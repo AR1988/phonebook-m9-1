@@ -57,6 +57,8 @@ import {ActivationTokenAdminTableComponent} from './pages/admin-panel/activation
 import {SortFilterPipe} from "./pages/admin-panel/sort-filter.pipe";
 import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
 import {StatsAdminComponent} from "./pages/admin-panel/stats-admin/stats-admin.component";
+import {SearchFilterPipe} from './pages/admin-panel/user-filter.pipe';
+import {ActivateFilterPipe} from './pages/admin-panel/users-admin-table/activate-filter.pipe';
 
 @NgModule({
   declarations: [
@@ -108,6 +110,8 @@ import {StatsAdminComponent} from "./pages/admin-panel/stats-admin/stats-admin.c
     SortFilterPipe,
     PageNotFoundComponent,
     StatsAdminComponent,
+    SearchFilterPipe,
+    ActivateFilterPipe,
   ],
   imports: [
     BrowserModule,

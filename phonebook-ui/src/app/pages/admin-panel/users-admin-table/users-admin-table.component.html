@@ -1,38 +1,68 @@
+<div class="row">
+  <div class="col-lg-3 ">
+    <form [formGroup]="searchFormUser" id="search-form-user-admin">
+      <div class="form-group mt-2">
+        <input class="form-control" type="text" formControlName="searchInput" placeholder="Search..." id="search">
+      </div>
+    </form>
+  </div>
+  <div class="col-lg-3">
+    <div class="custom-control custom-switch mt-3">
+      <input type="checkbox" class="custom-control-input" id="customSwitch1" value="isActivated"
+             [(ngModel)]="onlyActivated">
+      <label class="custom-control-label" for="customSwitch1">Display unactivated</label>
+    </div>
+  </div>
+  <div class="col-lg-3">
+    <div class="custom-control custom-switch mt-3">
+      <input type="checkbox" class="custom-control-input" id="customSwitch2" [(ngModel)]="showColumnProfile">
+      <label class="custom-control-label" for="customSwitch2">Column profile</label>
+    </div>
+  </div>
+  <div class="col-lg-3">
+    <div class="custom-control custom-switch mt-3">
+      <input type="checkbox" class="custom-control-input" id="customSwitch3" [(ngModel)]="showColumnRoles">
+      <label class="custom-control-label" for="customSwitch3">Column user Roles</label>
+    </div>
+  </div>
+</div>
+
 <table class="table table-striped" *ngIf="users">
   <thead>
   <tr>
 
     <th scope="col">#</th>
-
-    <th scope="col" (click)="sortBy = 'email'; reverseSort = !reverseSort">
+    <th scope="col" (click)="sort( 'email')">
       <a [routerLink]>Email
-        <span>
-            <app-sort-icon [show]="sortBy === 'email'" [iconUp]="reverseSort"></app-sort-icon>
-          </span>
+        <span><app-sort-icon [show]="sortBy === 'email'" [iconUp]="reverseSort"></app-sort-icon></span>
       </a>
     </th>
 
-    <th scope="col" (click)="sortBy = 'roles'; reverseSort = !reverseSort" >
+    <th scope="col" (click)="sort( 'roles')" *ngIf="showColumnRoles">
       <a [routerLink]>Roles
-        <span>
-            <app-sort-icon [show]="sortBy === 'roles'" [iconUp]="reverseSort"></app-sort-icon>
-          </span>
+        <span><app-sort-icon [show]="sortBy === 'roles'" [iconUp]="reverseSort"></app-sort-icon></span>
       </a>
     </th>
 
-    <th scope="col" (click)="sortBy = 'myProfileId'; reverseSort = !reverseSort" >
-      <a [routerLink]>profile
-        <span>
-            <app-sort-icon [show]="sortBy === 'myProfileId'" [iconUp]="reverseSort"></app-sort-icon>
-          </span>
-      </a>
-    </th>
+    <th scope="col" (click)="sort( 'myProfileId')" *ngIf="showColumnProfile">profile</th>
 
-    <th scope="col" (click)="sortBy = 'isActivated'; reverseSort = !reverseSort">
+    <th scope="col" (click)="sort( 'isActivated')">
       <a [routerLink]>isActivated
+        <span><app-sort-icon [show]="sortBy === 'isActivated'" [iconUp]="reverseSort"></app-sort-icon></span>
+      </a>
+    </th>
+
+    <th scope="col" (click)="sort( 'registeredAt')">
+      <a [routerLink]>registeredAt
         <span>
-            <app-sort-icon [show]="sortBy === 'isActivated'" [iconUp]="reverseSort"></app-sort-icon>
+            <app-sort-icon [show]="sortBy === 'registeredAt'" [iconUp]="reverseSort"></app-sort-icon>
           </span>
+      </a>
+    </th>
+
+    <th scope="col" (click)="sort( 'activateAt')">
+      <a [routerLink]>activateAt
+        <span><app-sort-icon [show]="sortBy === 'activateAt'" [iconUp]="reverseSort"></app-sort-icon></span>
       </a>
     </th>
 
@@ -41,17 +71,21 @@
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let user of users | sortFilter: sortBy :reverseSort ; index as i">
+  <tr
+    *ngFor="let user of users | sortFilter: sortBy :reverseSort | searchFilter :searchTerm: 'email' | activateFilter: onlyActivated; index as i">
     <th scope="row">{{ i + 1 }}</th>
     <td>{{ user.email }}</td>
-    <td>{{ user.roles }}</td>
-    <td>{{ user.myProfileId}}</td>
+    <td *ngIf="showColumnRoles">{{ user.roles }}</td>
+    <td *ngIf="showColumnProfile">{{ user.myProfileId}}</td>
     <td>
-      <button class="btn btn-warning" (click)="activate(user)" *ngIf="!user.isActivated">Activate user</button>
-      <p *ngIf="user.isActivated">{{ user.isActivated}}</p></td>
+      <button class="btn btn-warning" (click)="activate(user)" *ngIf="!user.isActivated">Activate</button>
+      <p *ngIf="user.isActivated">{{ user.isActivated}}</p>
+    </td>
+    <td>{{ user.registeredAt | date}}</td>
+    <td>{{ user.activateAt | date}}</td>
     <td>
-      <button class="btn btn-warning" (click)="removeUser(user)" [disabled]="user.roles.includes('ADMIN')">Remove user</button>
-
+      <button class="btn btn-warning" (click)="removeUser(user)" [disabled]="user.roles.includes('ADMIN')">Remove
+      </button>
     </td>
   </tr>
   </tbody>

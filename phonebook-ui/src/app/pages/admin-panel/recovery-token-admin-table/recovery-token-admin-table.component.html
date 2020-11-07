@@ -18,6 +18,13 @@
       </a>
     </th>
 
+    <th scope="col" (click)="sortBy = 'createDate'; reverseSort = !reverseSort">
+      <a [routerLink]>Created At<span>
+            <app-sort-icon [show]="sortBy === 'createDate'" [iconUp]="reverseSort"></app-sort-icon>
+          </span>
+      </a>
+    </th>
+
     <th scope="col">...</th>
   </tr>
   </thead>
@@ -26,6 +33,7 @@
     <th scope="row">{{ i + 1 }}</th>
     <td>{{ token.userId }}</td>
     <td>{{ token.token }}</td>
+    <td>{{ token.createDate |date }}</td>
     <td>
       <button class="btn btn-warning" (click)="removeToken(token.token)">Remove</button>
     </td>

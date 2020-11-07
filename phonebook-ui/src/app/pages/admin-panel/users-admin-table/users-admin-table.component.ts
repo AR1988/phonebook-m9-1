@@ -1,8 +1,8 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {User} from "../../../model/user";
 import {AdminService} from "../../../service/admin.service";
 import {UserAdmin} from "../../../model/admin-models/user-admin";
 import {Subscription} from "rxjs";
+import {FormBuilder, FormGroup} from "@angular/forms";
 
 @Component({
   selector: 'app-users-admin-table',
@@ -17,11 +17,31 @@ export class UsersAdminTableComponent implements OnInit, OnDestroy {
 
   private subscriptions = new Subscription();
 
-  constructor(public adminService: AdminService) {
+  searchFormUser: FormGroup;
+  searchTerm: string;
+  onlyActivated = false;
+  showColumnProfile: boolean = false;
+  showColumnRoles: boolean = false;
+
+  constructor(public adminService: AdminService,
+              private fb: FormBuilder) {
   }
 
   ngOnInit(): void {
+    this.createForm();
     this.reload();
+
+    this.subscriptions.add(
+      this.searchFormUser.get("searchInput")
+        .valueChanges
+        .subscribe(searchText => this.searchTerm = searchText)
+    );
+  }
+
+  createForm(): void {
+    this.searchFormUser = this.fb.group({
+      searchInput: []
+    });
   }
 
   reload(): void {
@@ -30,7 +50,7 @@ export class UsersAdminTableComponent implements OnInit, OnDestroy {
     );
   }
 
-  removeUser(user: User) {
+  removeUser(user: UserAdmin) {
     this.subscriptions.add(
       this.adminService.removeUser(user).subscribe(() => {
         this.ngOnInit();
@@ -38,7 +58,7 @@ export class UsersAdminTableComponent implements OnInit, OnDestroy {
     );
   }
 
-  activate(user: User): void {
+  activate(user: UserAdmin): void {
     this.subscriptions.add(
       this.adminService.activateUser(user).subscribe(() => {
         this.ngOnInit();
@@ -48,5 +68,13 @@ export class UsersAdminTableComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
+  }
+
+  sort(sortBy: string): void {
+    if (this.sortBy !== sortBy)
+      this.reverseSort = false;
+
+    this.sortBy = sortBy;
+    this.reverseSort = !this.reverseSort;
   }
 }

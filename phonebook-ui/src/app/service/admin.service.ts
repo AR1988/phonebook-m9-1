@@ -1,6 +1,5 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {User} from "../model/user";
 import {Observable} from "rxjs";
 import {UserAdmin} from "../model/admin-models/user-admin";
 import {ContactAdmin} from "../model/admin-models/contact-admin";
@@ -53,7 +52,7 @@ export class AdminService {
     return this.http.get<RecoveryTokenAdmin[]>(`${this.adminPath}/recovery-token`)
   }
 
-  removeUser(user: User): Observable<void> {
+  removeUser(user: UserAdmin): Observable<void> {
     return this.http.delete<void>(`${this.adminPath}/${user.email}`)
   };
 
@@ -65,7 +64,7 @@ export class AdminService {
     return this.http.delete<void>(`${this.adminPath}/recovery-token/${tokenId}`)
   };
 
-  activateUser(user: User): Observable<void> {
+  activateUser(user: UserAdmin): Observable<void> {
     return this.http.patch<void>(`${this.adminPath}/activate`, user);
   }
 

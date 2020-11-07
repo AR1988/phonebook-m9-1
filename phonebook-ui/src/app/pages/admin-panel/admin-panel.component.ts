@@ -7,14 +7,18 @@ import {Component} from '@angular/core';
 })
 export class AdminPanelComponent {
 
-  links = [
+  linksMain = [
     {title: 'Statistic', path: 'statistic'},
     {title: 'Users', path: 'users'},
+    {title: 'Recovery tokens', path: 'recovery-tokens'},
+    {title: 'Activations tokens', path: 'activate-tokens'},
+
+  ];
+
+  linksOther = [
     {title: 'Contacts', path: 'contacts'},
     {title: 'Phones', path: 'phones'},
     {title: 'Addresses', path: 'addresses'},
-    {title: 'Emails', path: 'emails'},
-    {title: 'Recovery tokens', path: 'recovery-tokens'},
-    {title: 'Activations tokens', path: 'activate-tokens'}
-  ];
+    {title: 'Emails', path: 'emails'}
+  ]
 }
