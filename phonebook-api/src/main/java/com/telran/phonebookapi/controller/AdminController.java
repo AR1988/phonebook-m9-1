@@ -22,7 +22,7 @@ public class AdminController {
 
     @GetMapping("/users")
     public List<UserInfoDto> getAllUsers() {
-        return adminService.getUserAllUsers().stream()
+        return adminService.geAllUsers().stream()
                 .map(user -> new UserInfoDto(
                         user.getEmail(),
                         user.getRoles(),
@@ -84,7 +84,7 @@ public class AdminController {
 
     @GetMapping("/recovery-token")
     public List<RecoveryTokenDto> getAllRecoveryPasswordTokens() {
-        return adminService.getAllRecoveryToken().stream()
+        return adminService.getAllRecoveryTokens().stream()
                 .map(activationToken -> new RecoveryTokenDto(
                         activationToken.getUser().getEmail(),
                         activationToken.getId(),
@@ -100,7 +100,7 @@ public class AdminController {
 
     @GetMapping("/activation-token")
     public List<ActivationTokenDto> getAllActivationTokens() {
-        return adminService.getAllActivationToken().stream()
+        return adminService.getAllActivationTokens().stream()
                 .map(activationToken -> new ActivationTokenDto(
                         activationToken.getUser().getEmail(),
                         activationToken.getUuid(),

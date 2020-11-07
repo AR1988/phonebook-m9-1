@@ -51,11 +51,11 @@ public class AdminService {
                 userRepository.countByIsActiveIsTrue());
     }
 
-    public List<RecoveryToken> getAllRecoveryToken() {
+    public List<RecoveryToken> getAllRecoveryTokens() {
         return recoveryTokenRepository.findAll();
     }
 
-    public List<ActivationToken> getAllActivationToken() {
+    public List<ActivationToken> getAllActivationTokens() {
         return activationTokenRepository.findAll();
     }
 
@@ -95,7 +95,7 @@ public class AdminService {
         return contactRepository.findAll();
     }
 
-    public List<User> getUserAllUsers() {
+    public List<User> geAllUsers() {
         return userRepository.findAll();
     }
 
