@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -19,15 +20,20 @@ public class User {
     @Setter
     private String password;
     @ElementCollection(fetch = FetchType.EAGER)
-    private Set<UserRole> roles = new HashSet<>();
+    private final Set<UserRole> roles = new HashSet<>();
     @Setter
     private boolean isActive;
     @OneToOne
     @Setter
     private Contact myProfile;
 
+    @Setter
+    private LocalDateTime activatedAt;
+    @Setter
+    private LocalDateTime registeredAt;
+
     @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
-    private List<Contact> contacts = new ArrayList<>();
+    private final List<Contact> contacts = new ArrayList<>();
 
     public User(String email, String password) {
         this.email = email;

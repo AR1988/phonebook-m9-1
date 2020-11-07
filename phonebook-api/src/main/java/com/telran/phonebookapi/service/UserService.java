@@ -13,6 +13,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Service
@@ -67,6 +68,7 @@ public class UserService {
             user.addRole(UserRole.USER);
             Contact profile = new Contact();
             user.setMyProfile(profile);
+            user.setRegisteredAt(LocalDateTime.now());
             contactRepository.save(profile);
             userRepository.save(user);
             profile.setUser(user);
@@ -82,6 +84,7 @@ public class UserService {
                 orElseThrow(() -> new TokenNotFoundException(NOT_ACTIVE_LINK));
         User user = activationToken.getUser();
         user.setActive(true);
+        user.setActivatedAt(LocalDateTime.now());
         userRepository.save(user);
         activationTokenRepository.delete(activationToken);
     }

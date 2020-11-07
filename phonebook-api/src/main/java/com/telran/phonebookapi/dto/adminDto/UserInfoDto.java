@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
 import java.util.Set;
 
 @Builder
@@ -15,4 +16,6 @@ public class UserInfoDto {
     public Set<UserRole> roles;
     public boolean isActivated;
     public int myProfileId;
+    public LocalDateTime registeredAt;
+    public LocalDateTime activateAt;
 }

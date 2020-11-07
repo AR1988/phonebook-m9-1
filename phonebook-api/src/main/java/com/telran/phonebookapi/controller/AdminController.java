@@ -27,7 +27,9 @@ public class AdminController {
                         user.getEmail(),
                         user.getRoles(),
                         user.isActive(),
-                        user.getMyProfile().getId()))
+                        user.getMyProfile().getId(),
+                        user.getRegisteredAt(),
+                        user.getActivatedAt()))
                 .collect(Collectors.toList());
     }
 
@@ -85,7 +87,8 @@ public class AdminController {
         return adminService.getAllRecoveryToken().stream()
                 .map(activationToken -> new RecoveryTokenDto(
                         activationToken.getUser().getEmail(),
-                        activationToken.getId()))
+                        activationToken.getId(),
+                        activationToken.getCreatedAt()))
                 .collect(Collectors.toList());
     }
 
@@ -100,7 +103,8 @@ public class AdminController {
         return adminService.getAllActivationToken().stream()
                 .map(activationToken -> new ActivationTokenDto(
                         activationToken.getUser().getEmail(),
-                        activationToken.getUuid()))
+                        activationToken.getUuid(),
+                        activationToken.getCreatedAt()))
                 .collect(Collectors.toList());
     }
 

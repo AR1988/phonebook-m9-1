@@ -12,6 +12,8 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
+
 
 @Profile(value = "dev")
 @Component
@@ -33,10 +35,14 @@ public class TestUserRunner implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) {
+        LocalDateTime dateTimeNow = LocalDateTime.now();
+
         if (userRepository.findById(testEmail).isEmpty()) {
 
             User user = new User(testEmail, bCryptPasswordEncoder.encode(testPassword));
             user.setActive(true);
+            user.setRegisteredAt(dateTimeNow);
+            user.setActivatedAt(LocalDateTime.now());
             user.addRole(UserRole.USER);
 
             userRepository.save(user);
@@ -53,6 +59,8 @@ public class TestUserRunner implements ApplicationRunner {
 
             User user = new User("admin." + testEmail, bCryptPasswordEncoder.encode("admin." + testPassword));
             user.setActive(true);
+            user.setRegisteredAt(dateTimeNow);
+            user.setActivatedAt(dateTimeNow);
             user.addRole(UserRole.USER);
             user.addRole(UserRole.ADMIN);
 

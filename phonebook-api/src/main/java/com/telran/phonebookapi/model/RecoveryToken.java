@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import java.time.LocalDateTime;
 
 @Entity
 @NoArgsConstructor
@@ -17,6 +18,8 @@ public class RecoveryToken {
 
     @OneToOne
     private User user;
+
+    private final LocalDateTime createdAt = LocalDateTime.now();
 
     public RecoveryToken(String id, User user) {
         this.id = id;

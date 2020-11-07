@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import static com.telran.phonebookapi.service.UserService.USER_DOES_NOT_EXIST;
@@ -74,6 +75,7 @@ public class AdminService {
 
         User user = userRepository.findById(userEmail).orElseThrow(() -> new EntityNotFoundException(USER_DOES_NOT_EXIST));
         user.setActive(true);
+        user.setActivatedAt(LocalDateTime.now());
         userRepository.save(user);
     }
 
