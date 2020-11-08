@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface IRecoveryTokenRepository extends CrudRepository<RecoveryToken, String> {
 
-    void deleteByUserEmail(String email);
-
     List<RecoveryToken> findAll();
+
+    List<RecoveryToken> findAllByUserEmail(String userEmail);
 }

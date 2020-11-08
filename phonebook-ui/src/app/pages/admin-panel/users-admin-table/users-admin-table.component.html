@@ -81,8 +81,8 @@
       <button class="btn btn-warning" (click)="activate(user)" *ngIf="!user.isActivated">Activate</button>
       <p *ngIf="user.isActivated">{{ user.isActivated}}</p>
     </td>
-    <td>{{ user.registeredAt | date}}</td>
-    <td>{{ user.activateAt | date}}</td>
+    <td>{{ user.registeredAt | date :'dd MMM. yy HH:mm:ss z' }}</td>
+    <td>{{ user.activateAt | date :'dd MMM. yy HH:mm:ss z' }}</td>
     <td>
       <button class="btn btn-warning" (click)="removeUser(user)" [disabled]="user.roles.includes('ADMIN')">Remove
       </button>

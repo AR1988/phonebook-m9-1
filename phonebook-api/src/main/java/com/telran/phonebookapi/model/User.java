@@ -23,7 +23,7 @@ public class User {
     private final Set<UserRole> roles = new HashSet<>();
     @Setter
     private boolean isActive;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.REMOVE)
     @Setter
     private Contact myProfile;
 

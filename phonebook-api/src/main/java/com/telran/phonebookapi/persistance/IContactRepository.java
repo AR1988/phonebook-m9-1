@@ -8,6 +8,4 @@ import java.util.List;
 public interface IContactRepository extends CrudRepository<Contact, Integer> {
 
     List<Contact> findAll();
-
-    void deleteByUserEmail(String email);
 }

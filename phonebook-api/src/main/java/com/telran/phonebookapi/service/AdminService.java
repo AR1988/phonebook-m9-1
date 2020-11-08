@@ -6,7 +6,6 @@ import com.telran.phonebookapi.persistance.*;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
-import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -65,15 +64,17 @@ public class AdminService {
     }
 
     public void removeRecoveryToken(String id) {
-        recoveryTokenRepository.deleteById(id);
+        if (recoveryTokenRepository.findById(id).isPresent())
+            recoveryTokenRepository.deleteById(id);
     }
 
-    @Transactional
     public void activateUser(String userEmail) {
-        if (activationTokenRepository.findByUserEmail(userEmail).isPresent())
-            activationTokenRepository.deleteByUserEmail(userEmail);
+        ActivationToken activationToken = activationTokenRepository.findByUserEmail(userEmail);
+        if (activationToken != null)
+            removeActivationToken(activationToken.getUuid());
 
-        User user = userRepository.findById(userEmail).orElseThrow(() -> new EntityNotFoundException(USER_DOES_NOT_EXIST));
+        User user = userRepository.findById(userEmail)
+                .orElseThrow(() -> new EntityNotFoundException(USER_DOES_NOT_EXIST));
         user.setActive(true);
         user.setActivatedAt(LocalDateTime.now());
         userRepository.save(user);
@@ -99,15 +100,18 @@ public class AdminService {
         return userRepository.findAll();
     }
 
-    @Transactional
     public void removeUser(String userEmail) {
-        User user = userRepository.findById(userEmail)
-                .orElseThrow(() -> new EntityNotFoundException(USER_DOES_NOT_EXIST));
 
-        activationTokenRepository.deleteByUserEmail(user.getEmail());
-        recoveryTokenRepository.deleteByUserEmail(user.getEmail());
+        User user = userRepository.findById(userEmail).orElseThrow(EntityNotFoundException::new);
+        ActivationToken activationToken = activationTokenRepository.findByUserEmail(userEmail);
+        if (activationToken != null)
+            removeActivationToken(activationToken.getUuid());
 
-        contactRepository.deleteByUserEmail(user.getEmail());
+        List<RecoveryToken> recoveryTokenList = recoveryTokenRepository.findAllByUserEmail(userEmail);
+        if (recoveryTokenList.size() > 0)
+            for (RecoveryToken token : recoveryTokenList)
+                recoveryTokenRepository.deleteById(token.getId());
+
         userRepository.deleteById(user.getEmail());
     }
 }
